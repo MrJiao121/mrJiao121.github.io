@@ -18,7 +18,6 @@
 			padding: 0 24px;
 			background-repeat: no-repeat;
 			background-size: cover;
-			width: 100%;
 		}
 
 		.session-item:nth-child(1) {
@@ -26,7 +25,6 @@
 
 			background-size: cover;
 			background-repeat: no-repeat;
-			
 
 		}
 
@@ -81,15 +79,6 @@
 		}
 
 
-
-
-
-
-
-
-
-
-
 		.session-item .italic {
 			font-style: italic;
 		}
@@ -139,6 +128,63 @@
 		.session-item .content .jump {
 			text-decoration: underline;
 			margin: 12px 0;
+		}
+
+		#modal {
+			display: none;
+			/* 初始隐藏 */
+			position: fixed;
+			/* 固定定位 */
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			/* 半透明背景 */
+			justify-content: center;
+			align-items: center;
+		}
+
+		/* 弹框内容样式 */
+		#modal-content {
+			background-color: white;
+			padding: 20px;
+			border-radius: 5px;
+			text-align: left;
+		}
+
+		/* 关闭按钮样式 */
+		#close-btn,
+		#confirm-btn {
+			margin-top: 10px;
+			padding: 5px 10px;
+			background-color: #f44336;
+			color: white;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+
+		#close-btn {
+			background-color: #888;
+		}
+
+		#close-btn:hover {
+			background-color: #ccc;
+		}
+
+
+
+
+
+
+		#confirm-btn {
+			background-color: #f44336;
+
+		}
+
+		#confirm-btn:hover {
+			background-color: #da190b;
 		}
 	</style>
 </head>
@@ -344,8 +390,7 @@
 
 				<ul>
 					<li>
-						<h4>Coral Reef Alliance</h4>
-						<a class="link" href="https://coral.org">https://coral.org</a>
+						<h4><a class="link" href="https://coral.org">Coral Reef Alliance</a></h4>
 						Dedicated to saving the world’s coral reefs through education and conservation initiatives.
 					</li>
 
@@ -355,21 +400,24 @@
 
 
 
-						<h4>Environmental Working Group (EWG) Guide to Sunscreens</h4>
-						<a class="link" href="https://www.ewg.org/sunscreen">https://www.ewg.org/sunscreen</a>
+						<h4>
+							<a class="link" href="https://www.ewg.org/sunscreen">Environmental Working Group (EWG) Guide
+								to Sunscreens</a>
+						</h4>
+
 						Provides information on sunscreen products and ingredients.
 					</li>
 
 
 					<li>
-						<h4>Ocean Conservancye</h4>
-						<a class="link" href="https://oceanconservancy.org">https://oceanconservancy.org</a>
+						<h4> <a class="link" href="https://oceanconservancy.org">Ocean Conservancye</a> </h4>
+
 						Works to protect the ocean from today’s greatest global challenges.
 					</li>
 
 					<li>
-						<h4>Reef Check Foundation</h4>
-						<a class="link" href="https://www.reefcheck.org">https://www.reefcheck.org</a>
+						<h4><a class="link" href="https://www.reefcheck.org">Reef Check Foundation</a> </h4>
+
 						Promotes reef conservation through education and research.
 					</li>
 				</ul>
@@ -452,18 +500,52 @@
 
 
 	</div>
+
+	<div id="modal">
+		<!-- 弹框内容 -->
+		<div id="modal-content">
+			<label>
+				<input type="radio" name="gender" value="sign" onclick="showSelection(this)">
+				Sign your name and become part of the movement!
+			</label><br>
+			<label>
+				<input type="radio" name="gender" value="other" onclick="showSelection(this)">
+				Maybe next time
+			</label><br>
+			<!-- 关闭按钮 -->
+			<button id="close-btn">关闭</button>
+			<button id="confirm-btn">确定</button>
+		</div>
+	</div>
 	<script>
 
-
+		function showSelection (radio) {
+			var selectedValue = radio.value;
+			console.log(selectedValue)
+		}
 		// 获取ID为'sign'的元素  
 		var signElement = document.getElementById('sign');
+
+		var modal = document.getElementById('modal');
+		var closeBtn = document.getElementById('close-btn');
+		var confirmBtn = document.getElementById('confirm-btn');
+
+
+		closeBtn.addEventListener('click', function () {
+			modal.style.display = 'none'; // 隐藏弹框  
+		});
+		confirmBtn.addEventListener('click', function () {
+			modal.style.display = 'none'; // 隐藏弹框  
+		});
+
 
 		// 检查元素是否存在  
 		if (signElement) {
 			// 为元素绑定点击事件  
 			signElement.addEventListener('click', function () {
 				// 在这里编写点击时要执行的代码  
-				confirm('sign in');
+				modal.style.display = 'flex'; // 使用flex布局来居中内容  
+				// confirm('sign in');
 			});
 		} else {
 			console.error('未找到ID为sign的元素。');
